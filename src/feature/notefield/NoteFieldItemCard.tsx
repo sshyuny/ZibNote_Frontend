@@ -1,4 +1,4 @@
-import { NoteFieldItemType } from "@/types/NoteFieldType";
+import { NoteFieldItemType } from "@/feature/notefield/NoteFieldType";
 
 export default function NoteFieldItemCard({ item }: { item: NoteFieldItemType }) {
     return (

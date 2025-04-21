@@ -1,4 +1,4 @@
-import { SearchItemType } from "@/types/SearchType"
+import { SearchItemType } from "@/feature/search/SearchType"
   
 export default function SearchItemCard({ item, onSuccess }: { item: SearchItemType, onSuccess: Function }) {
 

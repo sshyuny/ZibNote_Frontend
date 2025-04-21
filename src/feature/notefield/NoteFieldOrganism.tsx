@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from "react"
-import NoteFieldList from "@/components/notefield/NoteFieldList"
-import NoteFieldReqForm from "@/components/notefield/NoteFieldReqForm"
+import NoteFieldReqForm from "@/feature/notefield/NoteFieldReqForm"
+import NoteFieldList from "@/feature/notefield/NoteFieldList"
+
 
 export default function NoteFieldOrganism() {
 

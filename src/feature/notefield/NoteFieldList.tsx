@@ -1,17 +1,16 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { SearchItemType } from '@/types/SearchType'
-import SearchItemCard from './SearchItemCard'
+import NoteFieldItemCard from './NoteFieldItemCard'
+import { NoteFieldItemType } from '@/feature/notefield/NoteFieldType'
 
+export default function NoteFieldList({refreshKey}: {refreshKey: number}) {
 
-export default function List({refreshKey, onSuccess}: {refreshKey: number, onSuccess: Function}) {
-
-    const [items, setItems] = useState<SearchItemType[]>([])
+    const [items, setItems] = useState<NoteFieldItemType[]>([])
     const [error, setError] = useState('')
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/search/list', {
+        fetch('http://localhost:8080/api/notefield/list', {
             credentials: 'include', // 세션/쿠키 인증일 경우 필요!
         })
         .then(res => {
@@ -27,7 +26,7 @@ export default function List({refreshKey, onSuccess}: {refreshKey: number, onSuc
     return (
         <div className="space-y-4">
             {items.map(item => (
-                <SearchItemCard key={'search'+item.searchId} item={item} onSuccess={onSuccess} />
+                <NoteFieldItemCard key={item.noteFieldId} item={item} />
             ))}
         </div>
     )

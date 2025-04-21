@@ -1,7 +1,7 @@
 'use client'
 
-import NoteFieldOrganism from "@/components/notefield/NoteFieldOrganism"
-import SearchOrganism from "../../components/dashboard/search/SearchOrganism"
+import NoteFieldOrganism from "@/feature/notefield/NoteFieldOrganism"
+import SearchOrganism from "@/feature/search/SearchOrganism"
 
 export default function page() {
 
