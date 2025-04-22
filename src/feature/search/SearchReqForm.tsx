@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import { mutate } from "swr"
+import { fetchSearchResults } from './api';
 
-export default function FieldReqForm({onSuccess}: {onSuccess: Function}) {
+export default function FieldReqForm({searchSwrKey}: {searchSwrKey: unknown[]}) {
 
   const [title, setTitle] = useState('')
   const [region, setRegion] = useState('')
@@ -30,7 +32,7 @@ export default function FieldReqForm({onSuccess}: {onSuccess: Function}) {
         throw new Error(errorData.message || '조회 실패')
       }
 
-      onSuccess()
+      mutate(searchSwrKey, () => fetchSearchResults())
 
       setTitle('')
       setRegion('')

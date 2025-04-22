@@ -1,33 +1,22 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { SearchItemType } from '@/feature/search/SearchType'
 import SearchItemCard from './SearchItemCard'
+import { fetchSearchResults } from './api'
+import useSWR from 'swr'
 
 
-export default function List({refreshKey, onSuccess}: {refreshKey: number, onSuccess: Function}) {
+export default function SearchList({searchSwrKey}: {searchSwrKey: unknown[]}) {
 
-    const [items, setItems] = useState<SearchItemType[]>([])
-    const [error, setError] = useState('')
+    const { data, error, isLoading } = useSWR(
+        searchSwrKey,() => fetchSearchResults()
+    )
 
-    useEffect(() => {
-        fetch('http://localhost:8080/api/search/list', {
-            credentials: 'include', // 세션/쿠키 인증일 경우 필요!
-        })
-        .then(res => {
-            if (!res.ok) throw new Error('데이터 조회 실패')
-            return res.json()
-        })
-        .then(data => setItems(data.data))
-        .catch(err => setError(err.message))
-    }, [refreshKey])
-
-    if (error) return <p className="text-red-500">{error}</p>
+    if (error) return <p className="text-red-500">{error.message}</p>
 
     return (
         <div className="space-y-4">
-            {items.map(item => (
-                <SearchItemCard key={'search'+item.searchId} item={item} onSuccess={onSuccess} />
+            {data && data.data.map((item: any) => (
+                <SearchItemCard key={'search'+item.searchId} item={item}/>
             ))}
         </div>
     )

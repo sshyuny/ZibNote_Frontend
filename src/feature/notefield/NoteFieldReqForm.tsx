@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import { mutate } from "swr"
+import { fetchNoteFieldResults } from './api';
 
-export default function NoteFieldReqForm({onSuccess}: {onSuccess: Function}) {
+export default function NoteFieldReqForm({noteFieldSwrKey}: {noteFieldSwrKey: unknown[]}) {
 
   const [name, setName] = useState('')
   const [description, setDesctiption] = useState('')
@@ -29,7 +31,7 @@ export default function NoteFieldReqForm({onSuccess}: {onSuccess: Function}) {
         throw new Error(errorData.message || '로그인 실패')
       }
 
-      onSuccess()
+      mutate(noteFieldSwrKey, () => fetchNoteFieldResults())
 
     } catch (err: any) {
       setError(err.message)

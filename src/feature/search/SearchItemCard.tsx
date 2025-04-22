@@ -1,6 +1,10 @@
 import { SearchItemType } from "@/feature/search/SearchType"
+
+import { mutate } from "swr"
   
-export default function SearchItemCard({ item, onSuccess }: { item: SearchItemType, onSuccess: Function }) {
+export default function SearchItemCard({ item }: { item: SearchItemType}) {
+
+    const searchSwrKey = ["/search", '1'];
 
     const deleteOne = async () => {
         await fetch('http://localhost:8080/api/search', {
@@ -12,7 +16,7 @@ export default function SearchItemCard({ item, onSuccess }: { item: SearchItemTy
             credentials: 'include',
         })
 
-        onSuccess()
+        mutate(searchSwrKey)
     }
 
     return (
