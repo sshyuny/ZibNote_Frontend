@@ -1,13 +1,12 @@
-
 export interface SearchItemType {
-    searchId: number
-    title: string
-    region: string
-    description: string
+  searchId: number;
+  title: string;
+  region: string;
+  description: string;
 }
 
 export interface SearchRegisterType {
-    title: string
-    region: string
-    description: string
+  title: string;
+  region: string;
+  description: string;
 }
