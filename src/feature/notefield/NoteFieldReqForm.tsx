@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { mutate } from "swr"
-import { fetchNoteFieldResults } from './api';
+import { fetchNoteFieldResults, registerNoteField } from './api';
+import { NoteFieldRegisterType } from './NoteFieldType';
 
 export default function NoteFieldReqForm({noteFieldSwrKey}: {noteFieldSwrKey: unknown[]}) {
 
@@ -16,23 +17,11 @@ export default function NoteFieldReqForm({noteFieldSwrKey}: {noteFieldSwrKey: un
     setIsLoading(true)
     setError('')
 
+    const requestData: NoteFieldRegisterType = {name: name, description: description}
+
     try {
-      const response = await fetch('http://localhost:8080/api/notefield', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name: name, description: description }),
-        credentials: 'include', // 세션/쿠키 인증일 경우 필요!
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || '로그인 실패')
-      }
-
+      await registerNoteField(requestData);
       mutate(noteFieldSwrKey, () => fetchNoteFieldResults())
-
     } catch (err: any) {
       setError(err.message)
     } finally {

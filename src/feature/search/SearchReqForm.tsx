@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { mutate } from "swr"
-import { fetchSearchResults } from './api';
+import { fetchSearchResults, registerSearch } from './api';
+import { SearchRegisterType } from './SearchType';
 
 export default function FieldReqForm({searchSwrKey}: {searchSwrKey: unknown[]}) {
 
@@ -13,25 +14,15 @@ export default function FieldReqForm({searchSwrKey}: {searchSwrKey: unknown[]}) 
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
+
     e.preventDefault()
     setIsLoading(true)
     setError('')
 
+    const requestBody: SearchRegisterType = { title: title, description: description, region: region };
+
     try {
-      const response = await fetch('http://localhost:8080/api/search', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ title: title, description: description, region: region }),
-        credentials: 'include',
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || '조회 실패')
-      }
-
+      await registerSearch(requestBody);
       mutate(searchSwrKey, () => fetchSearchResults())
 
       setTitle('')

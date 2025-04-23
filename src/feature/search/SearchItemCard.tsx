@@ -1,21 +1,12 @@
 import { SearchItemType } from "@/feature/search/SearchType"
 
 import { mutate } from "swr"
+import { deleteSearch } from "./api";
   
-export default function SearchItemCard({ item }: { item: SearchItemType}) {
-
-    const searchSwrKey = ["/search", '1'];
+export default function SearchItemCard({ item, searchSwrKey }: { item: SearchItemType, searchSwrKey: unknown[]}) {
 
     const deleteOne = async () => {
-        await fetch('http://localhost:8080/api/search', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ searchId: item.searchId }),
-            credentials: 'include',
-        })
-
+        await deleteSearch(item.searchId);
         mutate(searchSwrKey)
     }
 

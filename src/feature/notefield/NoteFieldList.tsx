@@ -15,7 +15,7 @@ export default function NoteFieldList({noteFieldSwrKey}: {noteFieldSwrKey: unkno
     return (
         <div className="space-y-4">
             {data && data.data.map((item: any) => (
-                <NoteFieldItemCard key={item.noteFieldId} item={item} />
+                <NoteFieldItemCard key={item.noteFieldId} item={item} noteFieldSwrKey={noteFieldSwrKey}/>
             ))}
         </div>
     )

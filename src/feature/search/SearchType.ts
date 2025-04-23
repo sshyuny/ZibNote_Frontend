@@ -6,3 +6,8 @@ export interface SearchItemType {
     description: string
 }
 
+export interface SearchRegisterType {
+    title: string
+    region: string
+    description: string
+}

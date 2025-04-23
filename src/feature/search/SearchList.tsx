@@ -16,7 +16,7 @@ export default function SearchList({searchSwrKey}: {searchSwrKey: unknown[]}) {
     return (
         <div className="space-y-4">
             {data && data.data.map((item: any) => (
-                <SearchItemCard key={'search'+item.searchId} item={item}/>
+                <SearchItemCard key={'search'+item.searchId} item={item} searchSwrKey={searchSwrKey} />
             ))}
         </div>
     )

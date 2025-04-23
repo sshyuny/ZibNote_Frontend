@@ -4,3 +4,8 @@ export interface NoteFieldItemType {
     name: string
     description: string
 }
+
+export interface NoteFieldRegisterType {
+    name: string
+    description: string
+}
