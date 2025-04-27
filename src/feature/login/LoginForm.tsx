@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { MemberLoginType } from "../member/MemberType";
+import { loginMember } from "../member/api";
 
 export default function LoginForm() {
   const [name, setName] = useState("");
@@ -15,20 +17,10 @@ export default function LoginForm() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8080/api/member/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: name }),
-        credentials: "include",
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "로그인 실패");
-      }
-
+      const requestData: MemberLoginType = {
+        name: name,
+      };
+      await loginMember(requestData);
       router.push("/");
     } catch (err: any) {
       setError(err.message);

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { registerMember } from "../member/api";
+import { MemberRegisterType } from "../member/MemberType";
 
 export default function LoginForm() {
   const [name, setName] = useState("");
@@ -14,25 +16,11 @@ export default function LoginForm() {
     setError("");
 
     try {
-      const response = await fetch(
-        "http://localhost:8080/api/member/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name: name }),
-          credentials: "include", // 세션/쿠키 인증일 경우 필요!
-        },
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "로그인 실패");
-      }
-
-      const data = await response.json();
-      setMessage(`회원가입 성공!  ${data.memberName || name}`);
+      const requestData: MemberRegisterType = {
+        name: name,
+      };
+      const responseData = await registerMember(requestData);
+      setMessage(`회원가입 성공!  ${responseData.memberName || name}`);
     } catch (err: any) {
       setError(err.message);
     } finally {
