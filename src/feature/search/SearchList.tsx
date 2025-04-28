@@ -6,8 +6,10 @@ import useSWR from "swr";
 
 export default function SearchList({
   searchSwrKey,
+  setCommonSearch,
 }: {
   searchSwrKey: unknown[];
+  setCommonSearch: Function;
 }) {
   const { data, error, isLoading } = useSWR(searchSwrKey, () =>
     fetchSearchResults(),
@@ -23,6 +25,7 @@ export default function SearchList({
             key={"search" + item.searchId}
             item={item}
             searchSwrKey={searchSwrKey}
+            setCommonSearch={setCommonSearch}
           />
         ))}
     </div>
