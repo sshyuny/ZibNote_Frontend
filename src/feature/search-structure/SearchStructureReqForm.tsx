@@ -22,7 +22,14 @@ export default function SearchStructureReqForm({
   // function
   const openStructurePopup = () => setIsStructurePopupOpen(true);
   const closeStructurePopup = () => setIsStructurePopupOpen(false);
-  const handleSubmit = async (e: React.FormEvent) => {};
+  const handleSubmit = async (e: React.FormEvent) => {
+    if (commonSearch.searchId == 0) {
+      alert("임장 리스트에서 임장 항목을 하나 선택해주세요!");
+    }
+    if (structure.structureId == 0) {
+      alert("건물을 선택해주세요!");
+    }
+  };
 
   return (
     <>

@@ -1,6 +1,7 @@
 "use client";
 
 import { CommonSearchType } from "../dashboard/DashboardType";
+import SearchStructureList from "./SearchStructureList";
 import SearchStructureReqForm from "./SearchStructureReqForm";
 
 export default function SearchStructureOrganism({
@@ -17,6 +18,12 @@ export default function SearchStructureOrganism({
       </h1>
       <div className="w-full max-w-sm bg-white p-6 rounded-lg shadow-md mb-4">
         <SearchStructureReqForm
+          searchStructureSwrKey={searchStructureSwrKey}
+          commonSearch={commonSearch}
+        />
+      </div>
+      <div className="w-full max-w-sm bg-white p-6 rounded-lg shadow-md mb-4">
+        <SearchStructureList
           searchStructureSwrKey={searchStructureSwrKey}
           commonSearch={commonSearch}
         />
