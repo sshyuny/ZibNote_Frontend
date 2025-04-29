@@ -5,6 +5,11 @@ import { CommonSearchType } from "../dashboard/DashboardType";
 import StructurePopup from "../structure/StructurePopup";
 import { StructureType } from "../structure/StructureType";
 import { initialStructure } from "../structure/constants";
+import { SearchStructureRegisterType } from "./SearchStructureType";
+import { registerSearchStructure } from "./api";
+import { mutate } from "swr";
+
+const API_ORIGIN = process.env.NEXT_PUBLIC_ZIBNOTE_API_ORIGIN;
 
 export default function SearchStructureReqForm({
   searchStructureSwrKey,
@@ -18,6 +23,7 @@ export default function SearchStructureReqForm({
   const [description, setDesctiption] = useState("");
   // page vale
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const [isStructurePopupOpen, setIsStructurePopupOpen] = useState(false);
   // function
   const openStructurePopup = () => setIsStructurePopupOpen(true);
@@ -28,6 +34,24 @@ export default function SearchStructureReqForm({
     }
     if (structure.structureId == 0) {
       alert("건물을 선택해주세요!");
+    }
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+
+    const requestData: SearchStructureRegisterType = {
+      searchId: commonSearch.searchId,
+      structureId: structure.structureId,
+      description: description,
+    };
+
+    try {
+      await registerSearchStructure(requestData);
+      mutate(`/api/search-structure/list?searchId=${commonSearch.searchId}`);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -64,6 +88,8 @@ export default function SearchStructureReqForm({
             onChange={(e) => setDesctiption(e.target.value)}
             placeholder="설명"
           />
+
+          {error && <p className="text-red-500 text-sm">{error}</p>}
 
           <button
             type="submit"

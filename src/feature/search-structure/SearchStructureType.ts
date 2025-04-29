@@ -6,3 +6,9 @@ export interface SearchStructureItemType {
   structureName: string;
   description: string;
 }
+
+export interface SearchStructureRegisterType {
+  searchId: number;
+  structureId: number;
+  description: string;
+}

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { SearchStructureItemType } from "./SearchStructureType";
+import { mutate } from "swr";
+import { deleteSearchStructure } from "./api";
 
 export default function SearchStructureItemCard({
   searchStructureSwrKey,
@@ -14,8 +16,8 @@ export default function SearchStructureItemCard({
 
   const deleteOne = async () => {
     try {
-      //   await deleteSearchStructure(item.searchStructureId);
-      //   mutate(noteFieldSwrKey);
+      await deleteSearchStructure(item.searchStructureId);
+      mutate(`/api/search-structure/list?searchId=${item.searchId}`);
     } catch (err: any) {
       setError(err);
     }

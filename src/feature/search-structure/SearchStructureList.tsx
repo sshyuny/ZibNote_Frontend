@@ -3,10 +3,8 @@
 import { fetchSearchStructureResults } from "./api";
 import { CommonSearchType } from "../dashboard/DashboardType";
 import SearchStructureItemCard from "./SearchStructureItemCard";
-import useSWRMutation from "swr/mutation";
 import { useEffect } from "react";
-
-const API_ORIGIN = process.env.NEXT_PUBLIC_ZIBNOTE_API_ORIGIN;
+import useSWR from "swr";
 
 export default function SearchStructureList({
   searchStructureSwrKey,
@@ -16,14 +14,17 @@ export default function SearchStructureList({
   commonSearch: CommonSearchType;
 }) {
   // requester
-  const { trigger, data, error, isMutating } = useSWRMutation(
-    `${API_ORIGIN}/api/search-structure/list?searchId=${commonSearch.searchId}`,
+  const { data, error, mutate } = useSWR(
+    commonSearch.searchId
+      ? `/api/search-structure/list?searchId=${commonSearch.searchId}`
+      : null,
     fetchSearchStructureResults,
   );
   // Hooks
   useEffect(() => {
+    console.log(commonSearch.searchId);
     if (commonSearch.searchId != 0) {
-      trigger();
+      mutate(`/api/search-structure/list?searchId=${commonSearch.searchId}`);
     }
   }, [commonSearch.searchId]);
 
@@ -34,9 +35,10 @@ export default function SearchStructureList({
   return (
     <div className="space-y-4">
       {data &&
+        data.data &&
         data.data.map((item: any) => (
           <SearchStructureItemCard
-            key={"searchStructure" + item.searchId}
+            key={"searchStructure" + item.searchStructureId}
             searchStructureSwrKey={searchStructureSwrKey}
             item={item}
           />
