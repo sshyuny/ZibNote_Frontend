@@ -2,7 +2,7 @@ import { NoteFieldRegisterType } from "./NoteFieldType";
 
 const API_ORIGIN = process.env.NEXT_PUBLIC_ZIBNOTE_API_ORIGIN;
 
-export const fetchNoteFieldResults = async () => {
+export const fetchNoteFieldResults = async (key: string) => {
   const res = await fetch(`${API_ORIGIN}/api/notefield/list`, {
     credentials: "include",
   });

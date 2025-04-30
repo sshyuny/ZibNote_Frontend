@@ -11,9 +11,7 @@ export default function SearchList({
   searchSwrKey: unknown[];
   setCommonSearch: Function;
 }) {
-  const { data, error, isLoading } = useSWR(searchSwrKey, () =>
-    fetchSearchResults(),
-  );
+  const { data, error, isLoading } = useSWR(searchSwrKey, fetchSearchResults);
 
   if (error) return <p className="text-red-500">{error.message}</p>;
 

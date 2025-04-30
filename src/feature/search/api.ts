@@ -2,7 +2,7 @@ import { SearchRegisterType } from "./SearchType";
 
 const API_ORIGIN = process.env.NEXT_PUBLIC_ZIBNOTE_API_ORIGIN;
 
-export const fetchSearchResults = async () => {
+export const fetchSearchResults = async (key: string) => {
   const res = await fetch(`${API_ORIGIN}/api/search/list`, {
     credentials: "include",
   });

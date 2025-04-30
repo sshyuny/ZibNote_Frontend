@@ -27,7 +27,7 @@ export default function NoteFieldReqForm({
 
     try {
       await registerNoteField(requestData);
-      mutate(noteFieldSwrKey, () => fetchNoteFieldResults());
+      mutate(noteFieldSwrKey, () => fetchNoteFieldResults(""));
     } catch (err: any) {
       setError(err.message);
     } finally {

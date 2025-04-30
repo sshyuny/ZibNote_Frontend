@@ -2,8 +2,8 @@ import { SearchStructureRegisterType } from "./SearchStructureType";
 
 const API_ORIGIN = process.env.NEXT_PUBLIC_ZIBNOTE_API_ORIGIN;
 
-export const fetchSearchStructureResults = async (url: string) => {
-  const res = await fetch(`${API_ORIGIN}${url}`, {
+export const fetchSearchStructureResults = async (key: string) => {
+  const res = await fetch(`${API_ORIGIN}${key}`, {
     credentials: "include",
   });
 

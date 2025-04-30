@@ -29,7 +29,7 @@ export default function FieldReqForm({
 
     try {
       await registerSearch(requestBody);
-      mutate(searchSwrKey, () => fetchSearchResults());
+      mutate(searchSwrKey, () => fetchSearchResults(""));
 
       setTitle("");
       setRegion("");

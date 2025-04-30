@@ -11,9 +11,7 @@ export default function Home() {
   const router = useRouter();
 
   const memberSwrKey: unknown[] = ["/member", "1"];
-  const { data, error, isLoading } = useSWR(memberSwrKey, () =>
-    fetchMemberResult(),
-  );
+  const { data, error, isLoading } = useSWR(memberSwrKey, fetchMemberResult);
 
   useEffect(() => {
     if (error) {

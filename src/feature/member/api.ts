@@ -2,7 +2,7 @@ import { MemberLoginType, MemberRegisterType } from "./MemberType";
 
 const API_ORIGIN = process.env.NEXT_PUBLIC_ZIBNOTE_API_ORIGIN;
 
-export const fetchMemberResult = async () => {
+export const fetchMemberResult = async (key: string) => {
   const res = await fetch(`${API_ORIGIN}/api/member`, {
     credentials: "include",
   });
