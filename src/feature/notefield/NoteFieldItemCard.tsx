@@ -4,7 +4,7 @@ import { useState } from "react";
 import { mutate } from "swr";
 
 import { NoteFieldItemType } from "@/feature/notefield/NoteFieldType";
-import { deleteSearch } from "./api";
+import { deleteNoteField } from "./api";
 
 export default function NoteFieldItemCard({
   item,
@@ -17,7 +17,7 @@ export default function NoteFieldItemCard({
 
   const deleteOne = async () => {
     try {
-      await deleteSearch(item.noteFieldId);
+      await deleteNoteField(item.noteFieldId);
       mutate(noteFieldSwrKey);
     } catch (err: any) {
       setError(err);

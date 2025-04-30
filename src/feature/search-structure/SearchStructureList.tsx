@@ -22,7 +22,6 @@ export default function SearchStructureList({
   );
   // Hooks
   useEffect(() => {
-    console.log(commonSearch.searchId);
     if (commonSearch.searchId != 0) {
       mutate(`/api/search-structure/list?searchId=${commonSearch.searchId}`);
     }

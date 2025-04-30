@@ -28,7 +28,7 @@ export const registerNoteField = async (requestData: NoteFieldRegisterType) => {
   return res.json();
 };
 
-export const deleteSearch = async (noteFieldId: number): Promise<void> => {
+export const deleteNoteField = async (noteFieldId: number): Promise<void> => {
   const res = await fetch(`${API_ORIGIN}/api/notefield`, {
     method: "DELETE",
     headers: {
