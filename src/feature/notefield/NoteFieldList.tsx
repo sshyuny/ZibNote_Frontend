@@ -9,7 +9,10 @@ export default function NoteFieldList({
 }: {
   noteFieldSwrKey: unknown[];
 }) {
-  const { data, error, isLoading } = useSWR(noteFieldSwrKey, fetchNoteFieldResults);
+  const { data, error, isLoading } = useSWR(
+    noteFieldSwrKey,
+    fetchNoteFieldResults,
+  );
 
   if (error) return <p className="text-red-500">{error.message}</p>;
 

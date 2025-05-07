@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import StructureItemCard from "./StructureItemCard";
 import useSWRMutation from "swr/mutation";
 import { fetchStructureResults } from "./api";
-import { StructureType } from "./StructureType";
-const API_ORIGIN = process.env.NEXT_PUBLIC_ZIBNOTE_API_ORIGIN;
 
 export default function StructurePopup({
   closeStructurePopup,
@@ -19,7 +17,7 @@ export default function StructurePopup({
   const [structureAddress, setStructureAddress] = useState<string>("");
   // functions
   const { trigger, data, error, isMutating } = useSWRMutation(
-    `${API_ORIGIN}/api/structure/list?name=${structureName}&address=${structureAddress}`,
+    `/api/structure/list?name=${structureName}&address=${structureAddress}`,
     fetchStructureResults,
   );
 
