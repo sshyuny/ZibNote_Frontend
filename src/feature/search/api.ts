@@ -1,52 +1,26 @@
+import { fetchGetMethod, fetchWithBody } from "@/component/CommonApi";
 import { SearchRegisterType } from "./SearchType";
 
 const API_ORIGIN = process.env.NEXT_PUBLIC_ZIBNOTE_API_ORIGIN;
 
-export const fetchSearchResults = async (key: string) => {
-  const res = await fetch(`${API_ORIGIN}/api/search/list`, {
-    credentials: "include",
-  });
-
-  if (!res.ok) {
-    throw new Error("검색 실패");
-  }
-  return res.json();
+export const fetchSearchResults = async (key: string): Promise<any> => {
+  return fetchGetMethod(`${API_ORIGIN}/api/search/list`, "검색 실패");
 };
 
 export const registerSearch = async (
   requestBody: SearchRegisterType,
 ): Promise<void> => {
-  const res = await fetch(`${API_ORIGIN}/api/search`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: requestBody.title,
-      description: requestBody.description,
-      region: requestBody.region,
-    }),
-    credentials: "include",
-  });
-
-  if (!res.ok) {
-    throw new Error("등록 실패");
-  }
-  return res.json();
+  const body = {
+    title: requestBody.title,
+    description: requestBody.description,
+    region: requestBody.region,
+  };
+  return fetchWithBody(`${API_ORIGIN}/api/search`, "POST", body, "등록 실패");
 };
 
 export const deleteSearch = async (searchId: number): Promise<void> => {
-  const res = await fetch(`${API_ORIGIN}/api/search`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ searchId: searchId }),
-    credentials: "include",
-  });
-
-  if (!res.ok) {
-    throw new Error("삭제 실패");
-  }
-  return res.json();
+  const body = {
+    searchId: searchId,
+  };
+  return fetchWithBody(`${API_ORIGIN}/api/search`, "DELETE", body, "삭제 실패");
 };
