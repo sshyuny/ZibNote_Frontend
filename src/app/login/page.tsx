@@ -1,5 +1,6 @@
 import LoginForm from "@/feature/login/LoginForm";
 import RegisterForm from "@/feature/login/RegisterForm";
+import SocialLogin from "@/feature/login/SocialLogin";
 
 export default function LoginPage() {
   return (
@@ -15,6 +16,9 @@ export default function LoginPage() {
           회원가입
         </h2>
         <RegisterForm />
+      </div>
+      <div className="w-full max-w-sm bg-white p-6 rounded-lg shadow-md mt-4">
+        <SocialLogin />
       </div>
     </div>
   );
